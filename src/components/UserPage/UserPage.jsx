@@ -5,7 +5,7 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import {useSelector} from 'react-redux';
 import GalleryList from '../GalleryList/GalleryList';
 import { HashRouter as Router, Route } from 'react-router-dom';
-import GalleryItem from '../GalleryItem/GalleryItem';
+
 //import './App.css';
 
 function UserPage() {
@@ -31,6 +31,7 @@ function UserPage() {
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
       <div> {JSON.stringify(listOfItems)}
+      {/* <img src="/images/boyd_park.png" alt="Image Description" /> */}
 
       </div>
       <Router>
