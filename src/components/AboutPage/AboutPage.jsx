@@ -9,7 +9,14 @@ function AboutPage() {
   return (
     <div className="container">
       <div>
-        <p>This about page is for anyone to read!</p>
+        <p>This application was designed and developed by 
+          <h3>Ryan Wiser</h3>
+          for Prime Digital Academy.
+          </p>
+          <p>
+            Some of the technologies used to build this app include React, 
+            Redux, Redux-Saga, Node, Express, and SQL.
+          </p>
       </div>
     </div>
   );

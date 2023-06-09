@@ -20,9 +20,7 @@ function LandingPage() {
       <div className="grid">
         <div className="grid-col grid-col_8">
           <p>
-            Where COVID created the perfect time to get outside and "safely" recon and explore our Saint Paul parks. 
-            Minnesota makes great use of it's green spaces during the nice times of the year. The idea behind this project is to be able search for nearby 
-            playgrounds. A stretch goal would be to have this app filter by area code and region.
+            
 
         
 

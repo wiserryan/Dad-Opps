@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
   RETURNING "id";`
 
   // FIRST QUERY MAKES PARK
-  pool.query(insertPark, [req.body.park_id, req.body.address, req.body.description])
+  pool.query(insertPark, [req.body.park_id, req.body.address, req.body.description, req.body.photo])
   .then(result => {
     console.log('New Park Id:', result.rows[0].id); //ID IS HERE!
     
@@ -54,20 +54,40 @@ router.post('/', (req, res) => {
   })
 })
 
+// // PUT Route
+router.put('/like/:id', (req, res) => {
+  console.log(req.params);
+  const galleryId = req.params.id;
+  for(const galleryItem of galleryItems) {
+      if(galleryItem.id == galleryId) {
+          galleryItem.likes += 1;
+      }
+  }
+  res.sendStatus(200);
+}); // END PUT Route
+
+// DELETE /treats/<id>
+// router.delete('/:id', (req, res) => {
+//     // ?? what are we deleting
+//     console.log(req.params.id);
+//     const deleteIndex = Number(req.params.id);
+//     let queryText = `DELETE FROM treats WHERE id = $1`;
+//     pool.query(queryText, [deleteIndex]).then((result) => {
+//         res.sendStatus(200);
+//     }).catch((error) => {
+//         console.log(`ERROR in DELETE ${error}`);        
+//         res.sendStatus(500);
+//     });
+// });
+
+
+
+
+
 module.exports = router;
 
 
-// // PUT Route
-// router.put('/like/:id', (req, res) => {
-//   console.log(req.params);
-//   const galleryId = req.params.id;
-//   for(const galleryItem of galleryItems) {
-//       if(galleryItem.id == galleryId) {
-//           galleryItem.likes += 1;
-//       }
-//   }
-//   res.sendStatus(200);
-// }); // END PUT Route
+
 
 // // This route *should* return the logged in users pets
 // router.get('/', (req, res) => {

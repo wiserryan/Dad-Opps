@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
+import UpdateButton from '../UpdateButton/UpdateButton';
 import {useSelector} from 'react-redux';
 import GalleryList from '../GalleryList/GalleryList';
 import { HashRouter as Router, Route } from 'react-router-dom';
@@ -35,14 +36,23 @@ function UserPage() {
 
       </div>
       <Router>
-        <Route path="/" exact>
+        {/* <Route path="/" exact>
           <GalleryList />
-        </Route>
+        </Route> */}
       </Router>
       <GalleryList
         listOfItems={listOfItems}
         fetchGalleryItems={fetchGalleryItems}
         />
+
+<UpdateButton className="btn" />
+need to utilize formComponent here
+<br>
+</br>
+<br>
+</br>
+
+
       <LogOutButton className="btn" />
     </div>
   );
