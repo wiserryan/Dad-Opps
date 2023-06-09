@@ -2,12 +2,12 @@ import GalleryItem from "../GalleryItem/GalleryItem";
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import galleryItems from "../../../server/routes/gallery.data";
+//import galleryItems from "server/routes/gallery.data";
 //import '../GalleryList.css';
 
 function GalleryList () {
     const dispatch = useDispatch();
-    const parks = useSelector(store => store.parks);
+    const parks = useSelector(store => store.park);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_PARKS' });
@@ -16,8 +16,8 @@ function GalleryList () {
     return (
         <main>
             <h1>GalleryList</h1>
-            <section className="parks">
-                {parks.map(parks => {
+            <section className="park">
+                {parks.map(park => {
                     return (
                         <div key={GalleryList.id} >
                             <h3>{GalleryList.address}</h3>
