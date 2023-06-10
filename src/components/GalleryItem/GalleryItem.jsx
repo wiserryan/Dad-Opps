@@ -6,11 +6,7 @@ import {useSelector} from 'react-redux';
 // Basic functional component structure for React with default state
 // value setup. When making a new component be sure to replace the
 // component name TemplateFunction with the name for the new component.
-const increaseLikes = (event) => {
-  const action = { type: 'INCREASE_LIKES'};
-  console.log ('you likd the Photo');
-  dispatchEvent(action);
-}
+
 
 function GalleryItem({ item, fetchGalleryItems }) {
   const [playgroundImage, setPlaygroundImage] = useState(true);
@@ -19,15 +15,30 @@ function GalleryItem({ item, fetchGalleryItems }) {
    const renderLight = () => {
       if(toggle === true) {
         return (
-          <div onClick={() => setToggle(!toggle)}>{item.description} </div> 
+          <div onClick={() => setToggle(!toggle)}>{item.park_id}</div> 
         )
         } else {
         return (
-          <img src={item.path} />
+          <img src={item.photo} />
         )
       }
-  }
+    }
+
+    return (
+      <button>{renderLight()}</button>
+    )
 }    
+
+
+export default GalleryItem;
+
+
+
+// const increaseLikes = (event) => {
+//   const action = { type: 'INCREASE_LIKES'};
+//   console.log ('you likd the Photo');
+//   dispatchEvent(action);
+// }
 
 
 //   const photoLike = (e) => {
@@ -61,5 +72,3 @@ function GalleryItem({ item, fetchGalleryItems }) {
 //     </div>
 //   );
 // }
-
-export default GalleryItem;

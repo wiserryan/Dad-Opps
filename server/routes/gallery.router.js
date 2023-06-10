@@ -4,6 +4,7 @@ const router = express.Router();
 const galleryItems = require('./gallery.data');
 
 router.get('/', (req, res) => {
+  // res.send(galleryItems);
 
   const query = `SELECT * FROM park ORDER BY "park_id" ASC`;
   pool.query(query)
@@ -32,6 +33,30 @@ router.post('/', (req, res) => {
     
     const createdParkId = result.rows[0].id
 
+// Catch for first query
+  }).catch(err => {
+    console.log(err);
+    res.sendStatus(500)
+  })
+})
+
+ // PUT Route
+router.put('/like/:id', (req, res) => {
+  console.log(req.params);
+  const galleryId = req.params.id;
+  for(const galleryItem of galleryItems) {
+      if(galleryItem.id == galleryId) {
+          galleryItem.likes += 1;
+      }
+  }
+  res.sendStatus(200);
+}); // END PUT Route
+
+module.exports = router;
+
+
+
+
     // // Now handle the genre reference
     // const insertMovieGenreQuery = `
     //   INSERT INTO "movies_genres" ("movie_id", "genre_id")
@@ -47,24 +72,6 @@ router.post('/', (req, res) => {
     //     res.sendStatus(500)
     //   })
 
-// Catch for first query
-  }).catch(err => {
-    console.log(err);
-    res.sendStatus(500)
-  })
-})
-
-// // PUT Route
-router.put('/like/:id', (req, res) => {
-  console.log(req.params);
-  const galleryId = req.params.id;
-  for(const galleryItem of galleryItems) {
-      if(galleryItem.id == galleryId) {
-          galleryItem.likes += 1;
-      }
-  }
-  res.sendStatus(200);
-}); // END PUT Route
 
 // DELETE /treats/<id>
 // router.delete('/:id', (req, res) => {
@@ -79,15 +86,6 @@ router.put('/like/:id', (req, res) => {
 //         res.sendStatus(500);
 //     });
 // });
-
-
-
-
-
-module.exports = router;
-
-
-
 
 // // This route *should* return the logged in users pets
 // router.get('/', (req, res) => {

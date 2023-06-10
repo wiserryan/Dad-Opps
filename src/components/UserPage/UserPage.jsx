@@ -5,9 +5,10 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import UpdateButton from '../UpdateButton/UpdateButton';
 import {useSelector} from 'react-redux';
 import GalleryList from '../GalleryList/GalleryList';
+import GalleryItem from '../GalleryItem/GalleryItem';
 import { HashRouter as Router, Route } from 'react-router-dom';
 
-//import './App.css';
+
 
 function UserPage() {
    const [listOfItems, setListOfItems] = useState ([]);
@@ -31,32 +32,51 @@ function UserPage() {
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
-      <div> {JSON.stringify(listOfItems)}
-      {/* <img src="/images/boyd_park.png" alt="Image Description" /> */}
-
-      </div>
-      <Router>
-        {/* <Route path="/" exact>
-          <GalleryList />
-        </Route> */}
-      </Router>
-      <GalleryList
-        listOfItems={listOfItems}
-        fetchGalleryItems={fetchGalleryItems}
-        />
+      
+      
+      {listOfItems.map(item => {
+        return (
+          <GalleryItem
+            item={item}
+            fetchGalleryItems={fetchGalleryItems}
+          />
+        )
+      })}
+      
+   
 
 <UpdateButton className="btn" />
-need to utilize formComponent here
+((((need to utilize formComponent here))))
 <br>
 </br>
 <br>
 </br>
-
-
-      <LogOutButton className="btn" />
+<LogOutButton className="btn" />
     </div>
   );
 }
 
 // this allows us to use <App /> in index.js
 export default UserPage;
+
+
+// {/* <Router>
+//         {/* <Route path="/" exact>
+//           <GalleryList />
+//         </Route> */}
+//       </Router>
+//       {JSON.stringify(listOfItems)} */}
+
+  //  {/* <GalleryList
+  //       listOfItems={listOfItems}
+  //       fetchGalleryItems={fetchGalleryItems}
+  //       /> */}
+
+// {/* <div> {JSON.stringify(listOfItems)}
+//       {/* <img src="/images/boyd_park.png" alt="Image Description" /> */}
+
+//     </div> */}
+
+
+// import { useState, useEffect } from 'react';
+// import './App.css';
