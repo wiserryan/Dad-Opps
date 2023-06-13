@@ -6,40 +6,83 @@ import { useHistory } from 'react-router-dom';
 
 
 
-function GalleryList ({ item, fetchGalleryItems }) {
-    const [listOfItems, setListofItems] = useState([]);    
-        
-    const fetchGalleryList = () => {
-//GET request
-    axios.get('/gallery').then((response) => {
-//update array
-    setListofItems(response.data);
-    }).catch((error) => {
-    console.log(`error in GalleryList: ${error}`)
-    alert('Something went wrong with GalleryList');
-           })    
-       }
-//keep outside function
+function GalleryList () {
+
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const parks = useSelector(store => store.parks);
+
     useEffect(() => {
-    fetchGalleryList();
+        dispatch({ type: 'FETCH_PARKS' });
     }, []);
 
+const displayPark = (parkToDisplay) => {
+    console.log(parkToDisplay);
+    //dispatch is how we get data in to redux and into sagas
+    dispatch({ type: 'SET_PARK_DETAILS', payload: parkToDisplay });
+}
+
     return (
-        <div className="GalleryList">
-            
-            {listOfItems.map((item) => (
-                <GalleryItem 
-                    key={item.id} 
-                    item={item}
-                    fetchGalleryItems={fetchGalleryItems} />
-            )
-        )
-    }
-                    </div>
-    );                
-    }
+        <main>
+            <h1>GalleryList</h1>
+            <section className="parks">
+                {/* Parks is an array */}
+                {parks.map(park => {
+                    // for each park in the array display it on the DOM
+                    return (
+                        <div key={park.park_id} >
+                            <h3>{park.description}</h3>
+                            <img onClick={(event) => displayPark(park)} src={park.photo} alt={park.description}/>
+                        </div>
+                    )
+                })}
+            </section>
+        </main>
+    );
+
+}
+
+
     
 export default GalleryList;
+
+// put this back at top to work
+
+// { item, fetchGalleryItems }) {
+//     const [listOfItems, setListofItems] = useState([]);    
+        
+//     const fetchGalleryList = () => {
+// //GET request
+//     axios.get('/gallery').then((response) => {
+// //update array
+//     setListofItems(response.data);
+//     }).catch((error) => {
+//     console.log(`error in GalleryList: ${error}`)
+//     alert('Something went wrong with GalleryList');
+//            })    
+//        }
+// //keep outside function
+//     useEffect(() => {
+//     fetchGalleryList();
+//     }, []);
+
+//     return (
+//         <div className="GalleryList">
+            
+//             {listOfItems.map((item) => (
+//                 <GalleryItem 
+//                     key={item.id} 
+//                     item={item}
+//                     fetchGalleryItems={fetchGalleryItems} />
+//             )
+//         )
+//     }
+//                     </div>
+//     );                
+//     }
+
+
+
 
 
 

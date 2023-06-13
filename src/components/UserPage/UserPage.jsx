@@ -7,6 +7,7 @@ import {useSelector} from 'react-redux';
 import GalleryList from '../GalleryList/GalleryList';
 import GalleryItem from '../GalleryItem/GalleryItem';
 import { HashRouter as Router, Route } from 'react-router-dom';
+import ParkDetail from '../ParkDetail/ParkDetail';
 
 
 
@@ -33,15 +34,19 @@ function UserPage() {
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
       
-      
-      {listOfItems.map(item => {
+<Route exact path="/detail">
+  <ParkDetail />
+</Route>
+      {/* //code comment this back to get the pics// */}
+
+      {/* {listOfItems.map(item => {
         return (
           <GalleryItem
             item={item}
             fetchGalleryItems={fetchGalleryItems}
           />
         )
-      })}
+      })} */}
       
    
 

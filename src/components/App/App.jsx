@@ -19,8 +19,8 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-
 import './App.css';
+import ParkDetail from '../ParkDetail/ParkDetail';
 
 function App() {
   const dispatch = useDispatch();
