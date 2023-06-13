@@ -35,21 +35,24 @@ function UserPage() {
       <p>Your ID is: {user.id}</p>
 
 <Router>   
+  {/* not sure why this isn't rendering */}
   <Route exact path="/detail">
     <GalleryList />
   </Route>
-</Router>
 
-      {/* //code comment this back to get the pics// */}
 
-      {/* {listOfItems.map(item => {
+      {listOfItems.map(item => {
         return (
           <GalleryItem
             item={item}
             fetchGalleryItems={fetchGalleryItems}
           />
+          
+          
         )
-      })} */}
+      })}
+      </Router>
+
       
    
 
