@@ -31,7 +31,7 @@ router.post('/', (req, res) => {
   .then(result => {
     console.log('New Park Id:', result.rows[0].id); //ID IS HERE!
     
-    const createdParkId = result.rows[0].id
+    // const createdParkId = result.rows[0].id
 
 // Catch for first query
   }).catch(err => {

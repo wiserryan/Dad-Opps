@@ -33,10 +33,13 @@ function UserPage() {
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
-      
-<Route exact path="/detail">
-  <ParkDetail />
-</Route>
+
+<Router>   
+  <Route exact path="/detail">
+    <GalleryList />
+  </Route>
+</Router>
+
       {/* //code comment this back to get the pics// */}
 
       {/* {listOfItems.map(item => {

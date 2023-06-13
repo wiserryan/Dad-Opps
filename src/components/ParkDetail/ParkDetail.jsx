@@ -6,9 +6,10 @@ function ParkDetail () {
     const park = useSelector(store => store.selectedPark);
     return (
         <div>
-            <h3>Park Details</h3>
-            {/* <img src={park} alt={} /> */}
-            <p>Park description</p>
+            <h3>Park Detail</h3>
+            <h3>{park.photo}</h3>
+            <img src={park.description} alt={park.photo} />
+            <p>{park.address}</p>
         </div>
     )
     }

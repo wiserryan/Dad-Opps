@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import './App.css';
 import ParkDetail from '../ParkDetail/ParkDetail';
+import GalleryList from '../GalleryList/GalleryList';
 
 function App() {
   const dispatch = useDispatch();
@@ -58,6 +59,11 @@ function App() {
             path="/user"
           >
             <UserPage />
+            <Route 
+            exact path="/detail">
+            <GalleryList />
+         </Route>
+
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -104,16 +110,20 @@ function App() {
               // If the user is already logged in, 
               // redirect them to the /user page
               <Redirect to="/user" />
+              
               :
               // Otherwise, show the Landing page
               <LandingPage />
             }
+          
+            
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
           </Route>
+          
         </Switch>
         <Footer />
       </div>

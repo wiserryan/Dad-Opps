@@ -1,6 +1,7 @@
-import GalleryItem from "../GalleryItem/GalleryItem";
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+// import React, { useEffect } from 'react';
+// import GalleryItem from "../GalleryItem/GalleryItem";
+// import axios from 'axios';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -20,6 +21,7 @@ const displayPark = (parkToDisplay) => {
     console.log(parkToDisplay);
     //dispatch is how we get data in to redux and into sagas
     dispatch({ type: 'SET_PARK_DETAILS', payload: parkToDisplay });
+    history.push('/detail');
 }
 
     return (
