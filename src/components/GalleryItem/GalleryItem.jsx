@@ -26,9 +26,13 @@ function GalleryItem({ item, fetchGalleryItems }) {
 
     return (
       <>
-        {JSON.stringify(item)}
         <h3>{item.park_id}</h3>
         <button>{renderLight()}</button>
+        <br></br>
+        <br></br>
+        {JSON.stringify(item.description)}
+        
+        
       </>
       
     )
