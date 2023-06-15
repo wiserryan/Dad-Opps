@@ -1,46 +1,76 @@
+import GalleryList from '../GalleryList/GalleryList';
+
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const galleryItems = require('./gallery.data');
 
 router.get('/', (req, res) => {
-  // res.send(galleryItems);
-
-  const query = `SELECT * FROM park ORDER BY "park_id" ASC`;
-  pool.query(query)
-    .then( result => {
-      res.send(result.rows);
-    })
-    .catch(err => {
-      console.log('ERROR: Get all parks', err);
-      res.sendStatus(500)
-    })
-
+  console.log('GET Request made for /prime_park_app');
+  let queryText = 'SELECT * FROM "park";';
+  pool.query(queryText).then((result) => {
+    res.send(result.rows);
+  }).catch((error) => {
+    console.log(`Error in GET ${error}`);
+    res.sendStatus(500);
+  });
 });
 
 router.post('/', (req, res) => {
-
-// This route *should* add a pet for the logged in user
-// router.post('/', (req, res) => {
-  console.log('/park POST route');
+  console.log('POST Request made for /prime_park_app');
   console.log(req.body);
-  console.log('is authenticated?', req.isAuthenticated());
-  console.log('user', req.user);
-  if(req.isAuthenticated()) {
-      let queryText = `INSERT INTO "park" ("park_id", "description") VALUES ($1, $2);`;
-      pool.query(queryText, [req.body.name, req.user.id]).then(results => {
-          res.sendStatus(201);
-      }).catch(error => {
-          console.log(`error ${error}`);
-          res.sendStatus(500);
-      })
-  } else {
-      res.sendStatus(403);
-  }
-  
-});
+  let parkToAdd = req.body;
+  let queryText = `INSERT INTO "prime_park_app" ("park_id", "address", 
+                   "description", "photo") 
+                   VALUES ($1, $2, $3, $4)`;
+  pool.query(queryText, [parkToAdd.park_id, parkToAdd.address,
+  parkToAdd.description, parkToAdd.photo]).then((result) => {
+    res.sendStatus(201);
+  }).catch((error) =>
+  console.log(`Error in POST ${error}`);
+  res.sendStatus(500);
+  })  
+  // GalleryList.push(parkToAdd);
+  // res.sendStatus(201); //SUCCESS!!
+
 
 module.exports = router;
+
+//   // res.send(galleryItems);
+
+//   const query = `SELECT * FROM park ORDER BY "park_id" ASC`;
+//   pool.query(query)
+//     .then( result => {
+//       res.send(result.rows);
+//     })
+//     .catch(err => {
+//       console.log('ERROR: Get all parks', err);
+//       res.sendStatus(500)
+//     })
+
+// });
+
+
+// // This route *should* add a pet for the logged in user
+// // router.post('/', (req, res) => {
+//   console.log('/park POST route');
+//   console.log(req.body);
+//   console.log('is authenticated?', req.isAuthenticated());
+//   console.log('user', req.user);
+//   if(req.isAuthenticated()) {
+//       let queryText = `INSERT INTO "park" ("park_id", "description") VALUES ($1, $2);`;
+//       pool.query(queryText, [req.body.name, req.user.id]).then(results => {
+//           res.sendStatus(201);
+//       }).catch(error => {
+//           console.log(`error ${error}`);
+//           res.sendStatus(500);
+//       })
+//   } else {
+//       res.sendStatus(403);
+//   }
+  
+// });
+
 
   //   console.log(req.body);
 //   // RETURNING "id" will give us back the id of the created movie
