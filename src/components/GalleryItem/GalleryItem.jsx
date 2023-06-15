@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import {useSelector} from 'react-redux';
-//const galleryItems = require('../modules/gallery.data');
+// const galleryItems = require('../modules/gallery.data');
 
 // Basic functional component structure for React with default state
 // value setup. When making a new component be sure to replace the
@@ -25,7 +25,12 @@ function GalleryItem({ item, fetchGalleryItems }) {
     }
 
     return (
-      <button>{renderLight()}</button>
+      <>
+        {JSON.stringify(item)}
+        <h3>{item.park_id}</h3>
+        <button>{renderLight()}</button>
+      </>
+      
     )
 }    
 

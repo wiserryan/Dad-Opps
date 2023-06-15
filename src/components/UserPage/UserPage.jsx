@@ -34,13 +34,8 @@ function UserPage() {
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
 
-<Router>   
-  {/* not sure why this isn't rendering */}
-  <Route exact path="/detail">
-    <GalleryList />
-  </Route>
 
-
+      {/* Displays data returned from the axios GET */}
       {listOfItems.map(item => {
         return (
           <GalleryItem
@@ -51,10 +46,8 @@ function UserPage() {
           
         )
       })}
-      </Router>
 
       
-   
 
 <UpdateButton className="btn" />
 ((((need to utilize formComponent here))))

@@ -19,40 +19,63 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+
+// This route *should* add a pet for the logged in user
+// router.post('/', (req, res) => {
+  console.log('/park POST route');
   console.log(req.body);
-  // RETURNING "id" will give us back the id of the created movie
-  const insertPark = `
-  INSERT INTO "park" ("park_id", "address", "description", "photo")
-  VALUES ($1, $2, $3, $4)
-  RETURNING "id";`
-
-  // FIRST QUERY MAKES PARK
-  pool.query(insertPark, [req.body.park_id, req.body.address, req.body.description, req.body.photo])
-  .then(result => {
-    console.log('New Park Id:', result.rows[0].id); //ID IS HERE!
-    
-    // const createdParkId = result.rows[0].id
-
-// Catch for first query
-  }).catch(err => {
-    console.log(err);
-    res.sendStatus(500)
-  })
-})
-
- // PUT Route
-router.put('/like/:id', (req, res) => {
-  console.log(req.params);
-  const galleryId = req.params.id;
-  for(const galleryItem of galleryItems) {
-      if(galleryItem.id == galleryId) {
-          galleryItem.likes += 1;
-      }
+  console.log('is authenticated?', req.isAuthenticated());
+  console.log('user', req.user);
+  if(req.isAuthenticated()) {
+      let queryText = `INSERT INTO "park" ("park_id", "description") VALUES ($1, $2);`;
+      pool.query(queryText, [req.body.name, req.user.id]).then(results => {
+          res.sendStatus(201);
+      }).catch(error => {
+          console.log(`error ${error}`);
+          res.sendStatus(500);
+      })
+  } else {
+      res.sendStatus(403);
   }
-  res.sendStatus(200);
-}); // END PUT Route
+  
+});
 
 module.exports = router;
+
+  //   console.log(req.body);
+//   // RETURNING "id" will give us back the id of the created movie
+//   const insertPark = `
+//   INSERT INTO "park" ("park_id", "address", "description", "photo")
+//   VALUES ($1, $2, $3, $4)
+//   RETURNING "id";`
+
+//   // FIRST QUERY MAKES PARK
+//   pool.query(insertPark, [req.body.park_id, req.body.address, req.body.description, req.body.photo])
+//   .then(result => {
+//     console.log('New Park Id:', result.rows[0].id); //ID IS HERE!
+    
+//     // const createdParkId = result.rows[0].id
+
+// // Catch for first query
+//   }).catch(err => {
+//     console.log(err);
+//     res.sendStatus(500)
+//   })
+// })
+
+//  // PUT Route
+// router.put('/like/:id', (req, res) => {
+//   console.log(req.params);
+//   const galleryId = req.params.id;
+//   for(const galleryItem of galleryItems) {
+//       if(galleryItem.id == galleryId) {
+//           galleryItem.likes += 1;
+//       }
+//   }
+//   res.sendStatus(200);
+// }); // END PUT Route
+
+
 
 
 
