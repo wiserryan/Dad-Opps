@@ -1,4 +1,3 @@
-import GalleryList from '../GalleryList/GalleryList';
 
 const express = require('express');
 const pool = require('../modules/pool');
@@ -20,19 +19,43 @@ router.post('/', (req, res) => {
   console.log('POST Request made for /prime_park_app');
   console.log(req.body);
   let parkToAdd = req.body;
-  let queryText = `INSERT INTO "prime_park_app" ("park_id", "address", 
+  let queryText = `INSERT INTO "park" ("park_id", "address", 
                    "description", "photo") 
                    VALUES ($1, $2, $3, $4)`;
   pool.query(queryText, [parkToAdd.park_id, parkToAdd.address,
   parkToAdd.description, parkToAdd.photo]).then((result) => {
     res.sendStatus(201);
   }).catch((error) =>
-  console.log(`Error in POST ${error}`);
+  console.log(`Error in POST ${error}`));
   res.sendStatus(500);
   })  
-  // GalleryList.push(parkToAdd);
-  // res.sendStatus(201); //SUCCESS!!
 
+router.put('/:id', (req, res) => {
+  console.log(`In PUT request /park`);
+  let parkId = req.params.id;
+  let parkToEdit = req.params.body;
+  //! need to clarify query below: id and .text/.description, parkId in following line
+  let queryText = 'UPDATE "park" SET park_id = $1, description = $2 WHERE "id" = $3'; 
+pool.query(queryText, [parkToEdit.text, parkToEdit.description, parkId]).then((result) => {
+  res.sendStatus(200);
+}).catch((error) => {
+console.log(`ERROR in PUT ${error}`);
+res.sendStatus(500);
+})
+})
+
+
+router.delete('/id', (req, res) => {
+  console.log(req.params.id);
+  const deleteIndex = Number(req.params.id);
+  let queryText = 'DELETE FROM "park" WHERE "id" = $1';
+  pool.query(queryText, [deleteIndex]).then((result) => {
+    res.sendStatus(200);
+  }).catch((error) => {
+    console.log(`Error in DELETE ${error}`);
+    res.sendStatus(500);
+  });
+});
 
 module.exports = router;
 

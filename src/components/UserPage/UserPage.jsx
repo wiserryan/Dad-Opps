@@ -10,7 +10,6 @@ import { HashRouter as Router, Route } from 'react-router-dom';
 import ParkDetail from '../ParkDetail/ParkDetail';
 
 
-
 function UserPage() {
    const [listOfItems, setListOfItems] = useState ([]);
   //  this component doesn't do much to start, just renders some user reducer info to the DOM
@@ -28,28 +27,40 @@ function UserPage() {
        }, []);
 
   const user = useSelector((store) => store.user);
+
+let park = setListOfItems;
+
+  const removePark = (id) =>
+       dispatchEvent({ type: 'REMOVE_PARK', payload: id });
   
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
 
-
       {/* Displays data returned from the axios GET */}
       {listOfItems.map(item => {
+        
+        
         return (
           <GalleryItem
             item={item}
+            onClick
             fetchGalleryItems={fetchGalleryItems}
+
+            
           />
+          
+          
+            
           
           
         )
       })}
 
-      
+      <br>
+      </br>
 <UpdateButton className="btn" />
-((((need to utilize formComponent here))))
 <br>
 </br>
 <br>

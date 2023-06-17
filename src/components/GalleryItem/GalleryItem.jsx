@@ -7,15 +7,22 @@ import {useSelector} from 'react-redux';
 // value setup. When making a new component be sure to replace the
 // component name TemplateFunction with the name for the new component.
 
+let park = GalleryItem;
+
+const removePark = (id) =>
+  dispatchEvent({ type: 'REMOVE_PARK', payload: id });
+
 
 function GalleryItem({ item, fetchGalleryItems }) {
   const [playgroundImage, setPlaygroundImage] = useState(true);
   const [toggle, setToggle] = useState(false);
+  
+  
 
    const renderLight = () => {
       if(toggle === true) {
         return (
-          <div onClick={() => setToggle(!toggle)}>{item.park_id}</div> 
+          <div onClick={(event) => setToggle(!toggle)}>{item.park_id}</div> 
         )
         } else {
         return (
@@ -27,10 +34,16 @@ function GalleryItem({ item, fetchGalleryItems }) {
     return (
       <>
         <h3>{item.park_id}</h3>
+        <button onClick={() => 
+          removePark(park.park_id)}>
+          Delete
+        </button>
         <button>{renderLight()}</button>
         <br></br>
         <br></br>
         {JSON.stringify(item.description)}
+        <br>
+        </br>
         
         
       </>

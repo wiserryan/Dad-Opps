@@ -1,6 +1,6 @@
 // import React, { useEffect } from 'react';
 // import GalleryItem from "../GalleryItem/GalleryItem";
-// import axios from 'axios';
+import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -12,6 +12,10 @@ function GalleryList () {
     const dispatch = useDispatch();
     const history = useHistory();
     const parks = useSelector(store => store.parks);
+
+    const removePark = (id) =>
+       dispatchEvent({ type: 'REMOVE_PARK', payload: id });
+  
 
     useEffect(() => {
         dispatch({ type: 'FETCH_PARKS' });
@@ -32,9 +36,13 @@ const displayPark = (parkToDisplay) => {
                 {parks.map(park => {
                     // for each park in the array display it on the DOM
                     return (
-                        <div key={park.park_id} >
+                        <div key={park.id} >
+                            <button onClick={() => removePark(park.id)}>
+                                Delete</button>
                             <h3>{park.description}</h3>
-                            <img onClick={(event) => displayPark(park)} src={park.photo} alt={park.description}/>
+                            <img onClick={() => displayPark(park)} src={park.photo} alt={park.description}/>
+                            <br></br>
+                            <button onClick="deletePark(${park.id})">Delete</button>
                         </div>
                     )
                 })}
@@ -44,6 +52,16 @@ const displayPark = (parkToDisplay) => {
 
 }
 
+function deletePark(index) {
+    console.log(`Deleting quote ${index}`);
+    axios.delete(`/gallery/${index}`).then((response) => {
+        console.log(response);
+        displayPark();
+    }).catch((error) => {
+        console.log(error);
+        alert('Something went wrong.');
+    });
+}
 
     
 export default GalleryList;
