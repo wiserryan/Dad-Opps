@@ -9,34 +9,49 @@ import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 
-const startingParkArray = {
-  // { id: 1, path: 'images/Boyd_park.png', description: 'Awesome play area with lots of space, picnic tables, and feels safe.' },
-  // { id: 2, path: 'images/Edgcumbe_rec.png', description: 'Huge playground play with softball field near by, benches, and rec center nearby.' },
-  // { id: 3, path: 'images/Groveland.png', description: 'Two separate playgrounds in front of school, benches, fairly busy.' },
-  // { id: 4, path: 'images/Mattocks_park2.png', description: 'One of our favorite play areas with lots of people, picnic tables,feels safe with field nearby.' }
+
+const startingParkArray = [
+  // { id: 1, title: 'Boyd Park', path: 'images/Boyd_park.png', description: 'Awesome play area with lots of space, picnic tables, and feels safe.' },
+  { id: 2, title: 'Edgcumbe Rec', path: 'images/Edgcumbe_rec.png', description: 'Huge playground play with softball field near by, benches, and rec center nearby.' },
+  { id: 3, title: 'Groveland Park', path: 'images/Groveland.png', description: 'Two separate playgrounds in front of school, benches, fairly busy.' },
+  { id: 4, title: 'Mattocks Park', path: 'images/Mattocks_park2.png', description: 'One of our favorite play areas with lots of people, picnic tables,feels safe with field nearby.' }
 
 
+];
+
+
+const parkList = (state = startingParkArray, action) => {
+  switch (action.type) {
+    //add one park to existing array
+    case 'ADD_PARK':
+      return [ ...state, action.payload ]
+   //replace all existing parks
+      case 'SET_PARKS':
+        return action.payload;
+      default:
+        return state;
+  }
 };
 
 
-// Create the rootSaga generator function
-function* rootSaga() {
-  yield takeEvery('FETCH_PARKS', fetchAllParks);
-  yield takeLatest('REMOVE_PARK', removePark);
-}
-
-function* fetchAllParks() {
+function* fetchParks() {
   // GET all parks from the DB
   try {
-      const parks = yield axios.get('/api/park');
-      console.log('get all:', parks.data);
-      yield put({ type: 'SET_PARKS', payload: parks.data });
-
-  } catch {
-      console.log('get all error');
+      const response = yield axios.get('/api/park');
+      const action = { type: 'SET_PARKS', payload: response.data };
+      yield put(action);
+  } catch (error) {
+      console.log(`ERROR in fetchParks: ${error}`);
   }
       
 }
+
+// Create the rootSaga generator function
+function* rootSaga() {
+  yield takeLatest('FETCH_PARKS', fetchParks);
+  yield takeLatest('REMOVE_PARK', removePark);
+}
+
 
 function* removePark(action) {
   try {
@@ -75,8 +90,9 @@ const selectedPark = (state = {}, action) => {
 // Create one store that all components can use
 const storeInstance = createStore(
   combineReducers({
-      parks,
-      selectedPark,
+    parkList,  
+    parks,
+    selectedPark,
 
   }),
   // Add sagaMiddleware to our store

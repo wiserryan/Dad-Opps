@@ -19,10 +19,10 @@ router.post('/', (req, res) => {
   console.log('POST Request made for /prime_park_app');
   console.log(req.body);
   let parkToAdd = req.body;
-  let queryText = `INSERT INTO "park" ("park_id", "address", 
+  let queryText = `INSERT INTO "park" ("title", "address", 
                    "description", "photo") 
                    VALUES ($1, $2, $3, $4)`;
-  pool.query(queryText, [parkToAdd.park_id, parkToAdd.address,
+  pool.query(queryText, [parkToAdd.title, parkToAdd.address,
   parkToAdd.description, parkToAdd.photo]).then((result) => {
     res.sendStatus(201);
   }).catch((error) =>
@@ -35,7 +35,7 @@ router.put('/:id', (req, res) => {
   let parkId = req.params.id;
   let parkToEdit = req.params.body;
   //! need to clarify query below: id and .text/.description, parkId in following line
-  let queryText = 'UPDATE "park" SET park_id = $1, description = $2 WHERE "id" = $3'; 
+  let queryText = 'UPDATE "park" SET title = $1, description = $2 WHERE "id" = $3'; 
 pool.query(queryText, [parkToEdit.text, parkToEdit.description, parkId]).then((result) => {
   res.sendStatus(200);
 }).catch((error) => {

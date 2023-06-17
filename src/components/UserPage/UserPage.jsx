@@ -8,6 +8,7 @@ import GalleryList from '../GalleryList/GalleryList';
 import GalleryItem from '../GalleryItem/GalleryItem';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import ParkDetail from '../ParkDetail/ParkDetail';
+import NewParkForm from '../NewParkForm/NewParkForm';
 
 
 function UserPage() {
@@ -37,6 +38,8 @@ let park = setListOfItems;
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
+      <UpdateButton className="btn" />
+
 
       {/* Displays data returned from the axios GET */}
       {listOfItems.map(item => {
@@ -60,9 +63,9 @@ let park = setListOfItems;
 
       <br>
       </br>
-<UpdateButton className="btn" />
 <br>
 </br>
+<NewParkForm />
 <br>
 </br>
 <LogOutButton className="btn" />
