@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+
 // const galleryItems = require('../modules/gallery.data');
 
 // Basic functional component structure for React with default state
@@ -9,15 +10,18 @@ import {useSelector} from 'react-redux';
 
 let park = GalleryItem;
 
-const removePark = (id) =>
-  dispatchEvent({ type: 'REMOVE_PARK', payload: id });
+
 
 
 function GalleryItem({ item, fetchGalleryItems }) {
   const [playgroundImage, setPlaygroundImage] = useState(true);
   const [toggle, setToggle] = useState(false);
-  
-  
+  const dispatch = useDispatch ();
+
+
+  const removePark = (id) => {
+    dispatch({ type: 'REMOVE_PARK', payload: id })
+  };
 
    const renderLight = () => {
       if(toggle === true) {
@@ -33,9 +37,9 @@ function GalleryItem({ item, fetchGalleryItems }) {
 
     return (
       <>
-        <h3>{item.park_id}</h3>
+        <h3>{item.id}</h3>
         <button onClick={() => 
-          removePark(park.park_id)}>
+          removePark(item.id)}>
           Delete
         </button>
         <button>{renderLight()}</button>
