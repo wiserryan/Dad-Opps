@@ -37,7 +37,7 @@ function GalleryItem({ item, fetchGalleryItems }) {
 
     return (
       <>
-        <h3>{item.id}</h3>
+        <h3>{item.title}</h3>
         <button onClick={() => 
           removePark(item.id)}>
           Delete
