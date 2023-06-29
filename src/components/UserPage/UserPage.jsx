@@ -51,11 +51,7 @@ let park = setListOfItems;
             onClick
             fetchGalleryItems={fetchGalleryItems}
 
-          />
-          
-          
-            
-          
+          />  
           
         )
       })}
