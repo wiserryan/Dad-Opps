@@ -8,8 +8,8 @@ import user from './user.reducer';
 const parkList = (state = [], action) => {
   switch (action.type) {
     //add one park to existing array
-    case 'ADD_PARK':
-      return [ ...state, action.payload ]
+    // case 'ADD_PARK':
+    //   return [ ...state, action.payload ]
    //replace all existing parks
       case 'SET_PARKS':
         return action.payload;

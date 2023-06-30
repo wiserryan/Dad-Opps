@@ -61,7 +61,7 @@ function App() {
             <UserPage />
           </ProtectedRoute>
           <ProtectedRoute 
-            exact path="/detail">
+            exact path="/description">
             <GalleryList />
           </ProtectedRoute>
           <ProtectedRoute

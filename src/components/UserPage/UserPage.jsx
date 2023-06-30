@@ -68,7 +68,6 @@ let park = setListOfItems;
   );
 }
 
-// this allows us to use <App /> in index.js
 export default UserPage;
 
 

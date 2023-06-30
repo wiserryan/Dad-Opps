@@ -1,9 +1,9 @@
 const express = require('express');
 const pool = require('../modules/pool');
-
 const router = express.Router();
 
 router.get('/', (req, res) => {
+  const userId = req.user.id;
   const queryText = 'SELECT id, title FROM park';
   pool.query(queryText)
     .then((result) => { res.send(result.rows); })
@@ -24,16 +24,10 @@ router.get('/details/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const newPark = req.body;
-  const queryText = `INSERT INTO park ("id", "descripton", "address", "photo", "title")
-                    VALUES ($1, $2, $3, $4, $5)`;
-  const queryValues = [
-    newPark.id,
-    newPark.description,
-    newPark.address,
-    newPark.photo,
-    newPark.title,
-  ];
+  const { title, description, address, photo } = req.body;
+  const queryText = `INSERT INTO park ("description", "address", "photo", "title")
+                    VALUES ($1, $2, $3, $4)`;
+  const queryValues = [ title, description, address, photo ];
   pool.query(queryText, queryValues)
     .then(() => { res.sendStatus(201); })
     .catch((err) => {
@@ -45,12 +39,8 @@ router.post('/', (req, res) => {
 router.put('/', (req, res) => {
   const updatedPark = req.body;
 
-  const queryText = `UPDATE table_name
-  SET "title" = $1, 
-  "description" = $2, 
-  "address" = $3, 
-  "photo" = $4, 
-  WHERE id=$5;`;
+  const queryText = `INSERT INTO park (id, title, description, address, photo)
+    VALUES ($1, $2, $3, $4, $5)`;
 
   const queryValues = [
     updatedPark.description,
@@ -67,6 +57,11 @@ router.put('/', (req, res) => {
       res.sendStatus(500);
     });
 });
+
+router.post('/', (req, res) => {
+  console.log('/park POST route');
+})
+
 
 router.delete('/:id', (req, res) => {
   const queryText = 'DELETE FROM park WHERE id=$1';

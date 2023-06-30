@@ -16,19 +16,58 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  console.log('POST Request made for /prime_park_app');
+  console.log('/park POST route');
   console.log(req.body);
-  let parkToAdd = req.body;
-  let queryText = `INSERT INTO "park" ("title", "address", 
-                   "description", "photo") 
-                   VALUES ($1, $2, $3, $4)`;
-  pool.query(queryText, [parkToAdd.title, parkToAdd.address,
-  parkToAdd.description, parkToAdd.photo]).then((result) => {
+  console.log('is authenticated?', req.isAuthenticated());
+  console.log('user', req.user);
+
+if (req.isAuthenticated()) {
+  const userId = req.user.id;
+  const { id, title, description } = req.body;
+  const queryText = `INSERT INTO park ( id, title, description)
+    VALUES ($1, $2, $3)`;
+
+const values = [ userId, id, title, description ];
+
+pool.query(queryText, values)
+  .then(() => {
     res.sendStatus(201);
-  }).catch((error) =>
-  console.log(`Error in POST ${error}`));
-  res.sendStatus(500);
-  })  
+  })
+  .catch((error) => {
+    console.log('Error inserting park entry:', error);
+    res.sendStatus(500);
+  });
+} else {
+  res.sendStatus(403);
+}
+});
+  // let parkToAdd = req.body;
+  // let queryText = `INSERT INTO "park" ("title", "address", 
+  //                  "description", "photo") 
+  //                  VALUES ($1, $2, $3, $4)`;
+
+  // pool.query(queryText, [parkToAdd.title, parkToAdd.address,
+  // parkToAdd.description, parkToAdd.photo]).then((result) => {
+  //   res.sendStatus(201);
+  // }).catch((error) =>
+  // console.log(`Error in POST ${error}`));
+  // res.sendStatus(500);
+  // })  
+
+// router.post('/', (req, res) => {
+//   console.log('POST Request made for /prime_park_app');
+//   console.log(req.body);
+//   let parkToAdd = req.body;
+//   let queryText = `INSERT INTO "park" ("title", "address", 
+//                    "description", "photo") 
+//                    VALUES ($1, $2, $3, $4)`;
+//   pool.query(queryText, [parkToAdd.title, parkToAdd.address,
+//   parkToAdd.description, parkToAdd.photo]).then((result) => {
+//     res.sendStatus(201);
+//   }).catch((error) =>
+//   console.log(`Error in POST ${error}`));
+//   res.sendStatus(500);
+//   })  
 
 router.put('/:id', (req, res) => {
   console.log(`In PUT request /park`);

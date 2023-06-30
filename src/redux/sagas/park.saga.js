@@ -26,9 +26,25 @@ function* fetchParks() {
     }
   }
 
+  function* addPark(action) {
+    console.log('HERE!!');
+    try {
+      yield axios.post(`/api/park`, action.payload);
+      //!refresh list of parks after adding a new one//!
+      yield put({ type: 'FETCH_PARKS' });
+    } catch (error) {
+      alert('Something went wrong');
+      console.log(`ERROR in removePark ${error}`);
+      throw error;
+    }
+  }
+
+
 function* parkSaga() {
     yield takeLatest('FETCH_PARKS', fetchParks);
     yield takeLatest('REMOVE_PARK', removePark);
+    yield takeLatest('ADD_PARK', addPark);
+
 }
 
 export default parkSaga;

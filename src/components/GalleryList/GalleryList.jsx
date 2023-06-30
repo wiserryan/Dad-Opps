@@ -25,7 +25,7 @@ const displayPark = (parkToDisplay) => {
     console.log(parkToDisplay);
     //dispatch is how we get data in to redux and into sagas
     dispatch({ type: 'SET_PARK_DETAILS', payload: parkToDisplay });
-    history.push('/detail');
+    history.push('/description');
 }
 
     return (
@@ -51,20 +51,20 @@ const displayPark = (parkToDisplay) => {
     );
 
 }
+export default GalleryList;
 
-function deletePark(index) {
-    console.log(`Deleting quote ${index}`);
-    axios.delete(`/gallery/${index}`).then((response) => {
-        console.log(response);
-        displayPark();
-    }).catch((error) => {
-        console.log(error);
-        alert('Something went wrong.');
-    });
-}
+// function deletePark(index) {
+//     console.log(`Deleting quote ${index}`);
+//     axios.delete(`/gallery/${index}`).then((response) => {
+//         console.log(response);
+//         displayPark();
+//     }).catch((error) => {
+//         console.log(error);
+//         alert('Something went wrong.');
+//     });
+// }
 
     
-export default GalleryList;
 
 // put this back at top to work
 
