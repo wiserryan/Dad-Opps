@@ -20,7 +20,7 @@ useEffect(() => {
 
     const addNewPark = event => {
         event.preventDefault();
-        console.log(12345);
+        console.log('gillian');
         dispatch({ type: 'ADD_PARK', payload: newPark });
         //updates the next plant to have a new id
         setPark({ title: '', description: ''});
