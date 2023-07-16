@@ -22,6 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import './App.css';
 import ParkDetail from '../ParkDetail/ParkDetail';
 import GalleryList from '../GalleryList/GalleryList';
+import GalleryItem from '../GalleryItem/GalleryItem';
 
 function App() {
   const dispatch = useDispatch();
@@ -119,7 +120,10 @@ function App() {
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
-            <h1>404</h1>
+            <h1>404shoot</h1>
+          </Route>
+          <Route exact path="/detail">
+            <GalleryItem />
           </Route>
           
         </Switch>

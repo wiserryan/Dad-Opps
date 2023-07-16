@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 // const galleryItems = require('../modules/gallery.data');
 
@@ -17,6 +18,13 @@ function GalleryItem({ item, fetchGalleryItems }) {
   const [playgroundImage, setPlaygroundImage] = useState(true);
   const [toggle, setToggle] = useState(false);
   const dispatch = useDispatch ();
+  const history = useHistory();
+
+const displayParkDetails = (parkToDisplay) => {
+  console.log(parkToDisplay);
+  dispatch({ type: 'SET_PARK_DETAILS', payload: parkToDisplay})
+  history.push(`/detail/${parkToDisplay.item}`);
+}
 
 
   const removePark = (id) => {
@@ -35,6 +43,8 @@ function GalleryItem({ item, fetchGalleryItems }) {
       }
     }
 
+
+
     return (
       <>
         <h3>{item.title}</h3>
@@ -44,11 +54,16 @@ function GalleryItem({ item, fetchGalleryItems }) {
         </button>
         <button>{renderLight()}</button>
         <br></br>
+        <button onClick={() => displayParkDetails(item.title)}>DETAILS</button>
         <br></br>
         {JSON.stringify(item.description)}
         <br>
         </br>
-        
+
+        {/* onClick={() => displayPark(park)} src={park.photo} alt={park.description}/> */}
+        {/* {listOfItems.map(item => {
+        return (
+          <GalleryItem item={item}/> */}
         
       </>
       

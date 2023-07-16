@@ -34,6 +34,10 @@ let park = setListOfItems;
   const removePark = (id) =>
        dispatchEvent({ type: 'REMOVE_PARK', payload: id });
   
+  const displayPark = (parkToDisplay) => {
+
+  }
+       
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
@@ -44,14 +48,11 @@ let park = setListOfItems;
       {/* Displays data returned from the axios GET */}
       {listOfItems.map(item => {
         
-        
         return (
-          <GalleryItem
-            item={item}
-            onClick
-            fetchGalleryItems={fetchGalleryItems}
-
-          />  
+          <GalleryItem item={item}/>
+            // onClick
+            // fetchGalleryItems={fetchGalleryItems}
+          
           
         )
       })}
@@ -59,6 +60,7 @@ let park = setListOfItems;
       <br>
       </br>
 <br>
+
 </br>
 <NewParkForm />
 <br>

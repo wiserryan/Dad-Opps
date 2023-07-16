@@ -28,7 +28,7 @@ const parks = (state = [], action) => {
           return state;
   }
 }
-//selectedPark = movieToDisplay;
+//selectedPark = parkToDisplay;
 const selectedPark = (state = {}, action) => {
   switch (action.type) {
     case 'SET_PARK_DETAILS':

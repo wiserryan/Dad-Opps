@@ -44,7 +44,7 @@ function* fetchParks() {
     console.log('edit functionality to follow');//!not showing on CONSOLE//!
     try {
       yield axios.put(`/api/park`, action.payload);
-      yield put({ type: 'EDIT_PARKS' });
+      yield put({ type: 'FETCH_PARKS' });
     } catch (error) {
       alert('Something went wrong');
       console.log('Park entry edit request failed in saga', error);
