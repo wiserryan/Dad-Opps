@@ -16,6 +16,13 @@ function AboutPage() {
           <p>
             Some of the technologies used to build this app include React, 
             Redux, Redux-Saga, Node, Express, and SQL.
+<br></br>
+
+<br></br>            
+            Thanks to Prime Digital Academy who helped make this application possible. 
+            Major kudos to our cohort instructor, Chris Black, as well as our Code Coach 
+            Marc McCarthy. Thanks to their unending patience and positivity, this app went from concept to functional. 
+            To my cohort classmates in Tanzanite, thank you for making the journey a memorable one! 
           </p>
       </div>
     </div>
