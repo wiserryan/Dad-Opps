@@ -14,6 +14,27 @@ function* fetchParks() {
         
   }
 
+  // function* fetchSpecificPark() {
+  //   // GET all parks from the DB
+  //   try {
+  //       const response = yield axios.get('/api/park/details/:id');
+  //       const action = { type: 'FETCH_SPECIFIC_PARK', payload: req.param.id };
+  //       yield put(action);
+  //   } catch (error) {
+  //       console.log(`ERROR in fetchSpecificPark: ${error}`);
+  //   }
+        
+  // }
+  function* fetchSpecificPark(action) {
+    try {
+        const sPark = yield axios.get(`/api/park/${action.payload}`)
+        yield put({ type: 'GET_SPECIFIC_PARK', payload: sPark.data });
+        // fetch genres after fetch moviedetails
+    } catch (e) {
+        console.log(e);
+    }
+}
+
   function* removePark(action) {
     console.log('HERE!!');
     try {
@@ -54,9 +75,10 @@ function* fetchParks() {
 
 function* parkSaga() {
     yield takeLatest('FETCH_PARKS', fetchParks);
-    yield takeLatest('REMOVE_PARKS', removePark);
-    yield takeLatest('ADD_PARKS', addPark);
+    yield takeLatest('REMOVE_PARK', removePark);
+    yield takeLatest('ADD_PARK', addPark);
     yield takeLatest('EDIT_PARKS', editPark);
+    yield takeLatest('FETCH_SPECIFIC_PARK', fetchSpecificPark);
 
 }
 

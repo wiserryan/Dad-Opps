@@ -21,9 +21,9 @@ function GalleryItem({ item, fetchGalleryItems }) {
   const history = useHistory();
 
 const displayParkDetails = (parkToDisplay) => {
-  console.log(parkToDisplay);
+  console.log('parkToDisplay', parkToDisplay);
   dispatch({ type: 'SET_PARK_DETAILS', payload: parkToDisplay})
-  history.push(`/detail/${parkToDisplay.item}`);
+  history.push(`/detail/${parkToDisplay}`);
 }
 
 
@@ -54,7 +54,7 @@ const displayParkDetails = (parkToDisplay) => {
         </button>
         <button>{renderLight()}</button>
         <br></br>
-        <button onClick={() => displayParkDetails(item.title)}>DETAILS</button>
+        <button onClick={() => displayParkDetails(item.id)}>DETAILS</button>
         <br></br>
         {JSON.stringify(item.description)}
         <br>

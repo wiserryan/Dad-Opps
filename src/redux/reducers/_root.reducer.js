@@ -37,6 +37,16 @@ const selectedPark = (state = {}, action) => {
       return state;
   }
 }
+
+const specificPark = (state = {}, action) => {
+  switch (action.type) {
+    case 'GET_SPECIFIC_PARK':
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
 // Lets make a bigger object for our store, with the objects from our reducers.
 // This is what we get when we use 'state' inside of 'mapStateToProps'
 const rootReducer = combineReducers({
@@ -45,6 +55,7 @@ const rootReducer = combineReducers({
   parkList,  
   parks,
   selectedPark,
+  specificPark,
 });
 
 export default rootReducer;

@@ -25,6 +25,8 @@ useEffect(() => {
         //updates the next plant to have a new id
         setPark({ title: '', description: ''});
     }
+
+    
     return (
         <div>
             <h3>Add New Park</h3>

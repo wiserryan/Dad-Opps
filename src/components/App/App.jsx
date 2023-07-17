@@ -117,14 +117,14 @@ function App() {
           
             
           </Route>
-
+          <Route exact path="/detail/:id">
+            <ParkDetail />
+          </Route>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404shoot</h1>
           </Route>
-          <Route exact path="/detail">
-            <GalleryItem />
-          </Route>
+          
           
         </Switch>
         <Footer />
