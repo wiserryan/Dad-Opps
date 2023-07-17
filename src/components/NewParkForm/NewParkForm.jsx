@@ -10,7 +10,7 @@ useEffect(() => {
 }, [dispatch]);
     
     //Initial state is an OBJECT, with keys id and name
-    let [newPark, setPark] = useState({ title: 'a', description: 'b', address: 'c', photo: 'd', title: 'e' });
+    let [newPark, setPark] = useState({ title: 'a', description: '', address: 'c', photo: 'd', title: '' });
 
     const handleNameChange = (event) => {
         console.log('event happened');
@@ -34,7 +34,7 @@ useEffect(() => {
             <form onSubmit={addNewPark}>
                 
                 <input type='text' value={newPark.title} onChange={handleNameChange} />
-                <input type='submit' value='Add New Park' />
+                <input type='submit' value='Title' />
                 <br></br>
                 <input type='text' value={newPark.description} onChange={handleNameChange} />
                 <input type='submit' value='Description'/>

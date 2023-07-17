@@ -42,7 +42,7 @@ let park = setListOfItems;
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
-      <UpdateButton className="btn" />
+      {/* <UpdateButton className="btn" /> */}
 
 
       {/* Displays data returned from the axios GET */}
